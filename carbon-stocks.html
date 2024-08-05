@@ -1,0 +1,94 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Carbon Stocks Calculator</title>
+
+    <style>
+        body {
+            font-family: "Segoe UI", Arial, sans-serif;
+        }
+        table, th, td {
+            border: 1px solid black;
+            border-collapse: collapse;
+            padding: 0.2rem;
+        }
+    </style>
+</head>
+<body>
+    <h2>Wetland Carbon Stocks Calculator</h2>
+
+    <table>
+        <tr>
+            <th><label for="wetland-type">Wetland Type</label></th>
+            <td>
+                <select name="wetland-type" id="wetland-type" onchange="update()">
+                    <option value="eiem">EIEM</option>
+                    <option value="eifo">EIFO</option>
+                    <option value="pem">PEM</option>
+                    <option value="pfo">PFO</option>
+                </select>
+            </td>
+        </tr>
+        <tr>
+            <th><label for="wetland-area">Wetland Area</label></th>
+            <td>
+                <input type="number" id="wetland-area" oninput="update()" value="15"/> Hectares
+            </td>
+        </tr>
+        <tr>
+            <th><label for="output-mean">Carbon Stocks - Mean</label></th>
+            <td>
+                <span id="output-mean"></span>
+            </td>
+        </tr>
+        <tr>
+            <th><label for="output-iqr">Carbon Stocks - IQR</label></th>
+            <td>
+                <span id="output-iqr"></span>
+            </td>
+        </tr>
+    </table>
+
+    <script>
+        let typeElement = document.getElementById("wetland-type");
+        let areaElement = document.getElementById("wetland-area");
+
+        let outputMeanElement = document.getElementById("output-mean");
+        let outputIqrElement = document.getElementById("output-iqr");
+
+        function update() {
+            let areaHa = areaElement.value;
+
+            let mean = 0;
+            let iqrLow = 0;
+            let iqrHigh = 0;
+
+            if (typeElement.value === "eiem") {
+                mean = areaHa * 151.13;
+                iqrLow = areaHa * 69.78;
+                iqrHigh = areaHa * 152.75;
+            } else if (typeElement.value === "eifo") {
+                mean = areaHa * 334.87;
+                iqrLow = areaHa * 259
+                iqrHigh = areaHa * 361;
+            } else if (typeElement.value === "pem") {
+                mean = areaHa * 344.50;
+                iqrLow = areaHa * 320.40;
+                iqrHigh = areaHa * 368.60;
+            } else if (typeElement.value === "pfo") {
+                mean = areaHa * 471.27;
+                iqrLow = areaHa * 261.74;
+                iqrHigh = areaHa * 739.60
+                outputMeanElement.innerText = ``;
+            } else {
+                outputMeanElement.innerText = "Invalid Value";
+            }
+
+            outputMeanElement.innerText = `${mean.toFixed(2)} Mg C`
+            outputIqrElement.innerText = `${iqrLow.toFixed(2)} - ${iqrHigh.toFixed(2)} Mg C`
+        }
+        update();
+    </script>
+</body>
+</html>
