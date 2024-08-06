@@ -9,7 +9,7 @@
             font-family: "Segoe UI", Arial, sans-serif;
         }
         table, th, td {
-            border: 1px solid black;
+            border: 2px solid black;
             border-collapse: collapse;
             padding: 0.2rem;
         }
@@ -64,11 +64,11 @@
             let iqrLow = 0;
             let iqrHigh = 0;
 
-            if (typeElement.value === "eiem") {
+            if (typeElement.value === "e1em") {
                 mean = areaHa * 61.18;
                 iqrLow = areaHa * 28.25;
                 iqrHigh = areaHa * 61.84;
-            } else if (typeElement.value === "eifo") {
+            } else if (typeElement.value === "e1fo") {
                 mean = areaHa * 135.57;
                 iqrLow = areaHa * 104.86;
                 iqrHigh = areaHa * 146.15;
